@@ -1,2 +1,2 @@
-arr = input().split(' ')
-print(int(arr[0])+int(arr[1]))
+a,b = tuple(map(int, input().split()))
+print(a+b)
