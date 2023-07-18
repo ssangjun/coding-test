@@ -1,44 +1,40 @@
-def seperator(name):
+def seperator(file_name):
     nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     
-    head = []
-    number = ""
-    tail = []
+    head = ""
+    head_done = False
     
-    head_done = False 
+    number = ""
     number_done = False
     
-    for l in name:
-        if not l in nums and not head_done:
-            head.append(l.lower())
+    tail = ""
+
+    for i, l in enumerate(file_name):
+        if not head_done and not l in nums:
+            head += l.lower()
             continue
         
         head_done = True
         
-        if l in nums and not number_done:
-            if number or l != 0:
-                number += l
+        if not number_done and l in nums:
+            number += l
             continue
         
         number_done = True
         
-        tail.append(l)
+        tail += l
         
-    return (name, head, int(number), tail) 
-        
+    return (file_name, head, int(number), tail)
+            
 
 def solution(files):
-    stack = []
+    arr = []
     
     for file in files:
-        stack.append(seperator(file))
-        # print(seperator(file))
-        
-    stack.sort(key = lambda x:(x[1], x[2]))
+        arr.append(seperator(file))
     
-    answer = []
+    arr.sort(key = lambda x:(x[1], x[2]))
     
-    for s in stack:
-        answer.append(s[0])
-        
+    answer = [row[0] for row in arr]
+
     return answer
